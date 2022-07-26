@@ -10,6 +10,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CompanyComponent } from './components/company/company.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     RegisterComponent,
     FooterComponent,
     ProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CompanyComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

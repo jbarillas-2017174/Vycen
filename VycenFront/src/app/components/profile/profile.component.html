@@ -12,7 +12,7 @@
                     </div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0">Name Last Name</h4>
-                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>Country</p>
+                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>Username</p>
                     </div>
                 </div>
             </div>
@@ -21,33 +21,36 @@
                     style="color: #ffffff !important; text-decoration: none; background-color:rgba(44, 129, 186, 0.7); max-height: 70px;">Edit
                     profile</button>
                 <div class="justify-content-end data">
-                    <ul class="list-inline mb-0 justify-content-end">
-                        <li class="list-inline-item">
-                            <h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted"> <i
-                                    class="fas fa-image mr-1"></i>Photos</small>
+                    <ul class="list-inline mb-0 justify-content-end text-center">
+                        <li class="list-inline-item text-center me-3">
+                            <h5 class="font-weight-bold mb-0 d-block">CLIENT</h5><small class="text-muted"> <i
+                                    class="fas fa-image mr-1"></i>Role</small>
                         </li>
-                        <li class="list-inline-item">
-                            <h5 class="font-weight-bold mb-0 d-block">745</h5><small class="text-muted"> <i
-                                    class="fas fa-user mr-1"></i>Followers</small>
-                        </li>
-                        <li class="list-inline-item">
-                            <h5 class="font-weight-bold mb-0 d-block">340</h5><small class="text-muted"> <i
-                                    class="fas fa-user mr-1"></i>Following</small>
+                        <li class="list-inline-item text-center ms-2">
+                            <h5 class="font-weight-bold mb-0 d-block">123456789123</h5><small class="text-muted"> <i
+                                    class="fas fa-user mr-1"></i>Phone</small>
                         </li>
                     </ul>
                 </div>
 
             </div>
-            <div class="px-4 py-3">
-                <h5 class="mb-0">About</h5>
-                <div class="p-4 rounded shadow-sm bg-primary mt-3">
-                    <p class="font-italic mb-0">Web Developer</p>
-                    <p class="font-italic mb-0">Lives in New York</p>
-                    <p class="font-italic mb-0">Photographer</p>
+            <div class="px-4 py-3 mt-2 mb-2">
+                <h5 class="mb-0 mt-2">Info</h5>
+                <div class="p-4 rounded mt-0">
+                    <p class="font-italic mb-0">Email</p>
+                    <p class="font-italic mb-0">Country</p>
+                    <p class="font-italic mb-0">Password</p>
                 </div>
             </div>
-            <div class="footer m-3">
-                <button class="btn btn-link" style="color: #d64939 !important;">Delete Account</button>
+            <div class="px-4 py-3 mt-2 mb-2">
+                <h5 class="mb-0 mt-2">About you</h5>
+                <div class="p-4 rounded shadow-sm bg-primary mt-4">
+                    <p class="font-italic mb-2">Tell us about you</p>
+
+                </div>
+            </div>
+            <div class="footer m-3 mb-4">
+                <button class="btn-delete ms-2" (click)="deleteAccount()"> Delete Account </button>
             </div>
         </div>
     </div>
