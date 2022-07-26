@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/userRest/user.service';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -15,14 +16,33 @@ export class ProfileComponent implements OnInit {
     },
     buttonsStyling: true
   })
+  account: any
 
-  constructor() { }
+  constructor(
+    private userRest: UserService
+  ) { }
 
   ngOnInit(): void {
+    this.getAccount()
+  }
+
+  getAccount() {
+    this.userRest.getUser(this.userRest.getIdentity()._id).subscribe({
+      next: (res: any) => this.account = res.users,
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message,
+          showConfirmButton: false,
+          timer: 2000
+        })
+      }
+    })
   }
 
 
-  delete(){
+
+  delete() {
     console.log('hola')
   }
   deleteAccount() {

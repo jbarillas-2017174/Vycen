@@ -24,7 +24,7 @@ exports.register = async (req, res) => {
         const msg = validateData(data);
         if (msg) return res.status(400).send(msg);
         if (data.role != 'CLIENT') return res.status(403).send({ message: 'Unauthorized action' });
-        if (!params.email.endsWith('@gmail.com')) return res.status(400).send({ message: 'Wrong email' });
+        if (!params.email.endsWith('@gmail.com')) return res.status(400).send({ message: 'Invalid Email' });
         const already = await User.findOne({ username: params.username })
         if (already) return res.status(400).send({ message: 'Username already in use' })
         data.password = await encrypt(params.password);

@@ -13,7 +13,7 @@ api.put('/updateAccount', mdAuth.ensureAuth, userController.updateAccount);
 api.delete('/deleteAccount', mdAuth.ensureAuth, userController.deleteAccount);
 
 api.get('/getUsers', [mdAuth.ensureAuth, mdAuth.isAdmin], userController.getUsers);
-api.get('/getUser/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], userController.getUser);
+api.get('/getUser/:id', [mdAuth.ensureAuth], userController.getUser);
 api.post('/createUser', [mdAuth.ensureAuth, mdAuth.isAdmin], userController.createUser);
 api.put('/updateUser/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], userController.updateUser);
 api.delete('/deleteUser/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], userController.deleteUser);

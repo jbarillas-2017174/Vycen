@@ -20,12 +20,12 @@
                     <a class="nav-link" href="#">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="">Company</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">New</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" *ngIf="!identity">Login</a>
+                </li>
+                <li class="nav-item dropdown" *ngIf="identity">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="20"
                             height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -36,7 +36,7 @@
                         <a class="dropdown-item" routerLink="/users">Users</a>
                         <a class="dropdown-item" routerLink="/company">Companies</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Log out</a>
+                        <a class="dropdown-item" (click)="logOut()">Log out</a>
                     </div>
                 </li>
             </ul>

@@ -12,6 +12,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CompanyComponent } from './components/company/company.component';
 import { UsersComponent } from './components/users/users.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,11 +26,13 @@ import { UsersComponent } from './components/users/users.component';
     ProfileComponent,
     NotFoundComponent,
     CompanyComponent,
-    UsersComponent
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

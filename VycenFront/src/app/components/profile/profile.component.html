@@ -11,8 +11,8 @@
                             alt="Profile Image" width="130" class="m-3 profile-img">
                     </div>
                     <div class="media-body mb-5 text-white">
-                        <h4 class="mt-0 mb-0">Name Last Name</h4>
-                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>Username</p>
+                        <h4 class="mt-0 mb-0">{{account.name}} {{account.lastName}}</h4>
+                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>Username: {{account.username}}</p>
                     </div>
                 </div>
             </div>
@@ -23,11 +23,11 @@
                 <div class="justify-content-end data">
                     <ul class="list-inline mb-0 justify-content-end text-center">
                         <li class="list-inline-item text-center me-3">
-                            <h5 class="font-weight-bold mb-0 d-block">CLIENT</h5><small class="text-muted"> <i
+                            <h5 class="font-weight-bold mb-0 d-block">{{account.role}}</h5><small class="text-muted"> <i
                                     class="fas fa-image mr-1"></i>Role</small>
                         </li>
                         <li class="list-inline-item text-center ms-2">
-                            <h5 class="font-weight-bold mb-0 d-block">123456789123</h5><small class="text-muted"> <i
+                            <h5 class="font-weight-bold mb-0 d-block">{{account.phone}}</h5><small class="text-muted"> <i
                                     class="fas fa-user mr-1"></i>Phone</small>
                         </li>
                     </ul>
@@ -37,9 +37,9 @@
             <div class="px-4 py-3 mt-2 mb-2">
                 <h5 class="mb-0 mt-2">Info</h5>
                 <div class="p-4 rounded mt-0">
-                    <p class="font-italic mb-0">Email</p>
-                    <p class="font-italic mb-0">Country</p>
-                    <p class="font-italic mb-0">Password</p>
+                    <p class="font-italic mb-0">Email: {{account.email}}</p>
+                    <p class="font-italic mb-0">Country: {{account.country}}</p>
+                    <p class="font-italic mb-0">Password: {{account.password}}</p>
                 </div>
             </div>
             <div class="px-4 py-3 mt-2 mb-2">
