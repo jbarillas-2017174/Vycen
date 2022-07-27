@@ -10,6 +10,7 @@
 }
 
 .card-img {
+    cursor: pointer;
     background-color: #057bad;
     height: 40%;
     width: 100%;
