@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductComponent } from './components/product/product.component';
+import { SeeProductsComponent } from './components/see-products/see-products.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ProductComponent } from './components/product/product.component';
     RegisterComponent,
     FooterComponent,
     ProductComponent,
+    SeeProductsComponent,
   ],
   imports: [
     BrowserModule,
