@@ -57,9 +57,10 @@ exports.getImage = async (req, res) => {
 
 exports.getImages = async (req, res) => {
     try {
-        const directoryPath = './uploads/img'
+        const directoryPath = './uploads/img';
+        const user = await Forum.find()
         const files = await fs.promises.readdir(directoryPath);
-        res.status(200).json(files);
+        res.status(200).send({message: files, user: user});
 
         /*const fileName = req.params.fileName;
         const img = await Forum.find();

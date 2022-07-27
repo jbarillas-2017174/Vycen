@@ -14,6 +14,7 @@ import { CompanyComponent } from './components/company/company.component';
 import { UsersComponent } from './components/users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ForumComponent } from './components/forum/forum.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     NotFoundComponent,
     CompanyComponent,
     UsersComponent,
+    ForumComponent,
   ],
   imports: [
     BrowserModule,
