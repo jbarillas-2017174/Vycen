@@ -48,3 +48,34 @@ exports.getCompany = async (req, res) => {
         return res.status(500).send(err);
     }
 }
+
+exports.updateCompany = async (req, res) => {
+    try {
+        const companyId = req.params.id;
+        const params = req.body;
+        const company = await Company.findOne({ _id: companyId });
+        if (!company) return res.status(404).send({ message: 'Company not found' });
+        const exist = await Company.findOne({ name: params.name });
+        if (!exist) return res.status(404).send({ message: 'Name in use' });
+        const update = await Company.findByIdAndUpdate({ _id: companyId }, params, { new: true });
+        if (!update) return res.status(500).send({ message: 'Cannot update this company' });
+        return res.send({ message: 'Company updated' });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err);
+    }
+}
+
+exports.deleteCompany = async (req, res) => {
+    try {
+        const companyId = req.params.id;
+        const company = await Company.findOne({ _id: companyId });
+        if (!company) return res.status(404).send({ message: 'Company not found' });
+        const deleteC = await Company.findOneAndDelete({ _id: companyId });
+        if (!deleteC) return res.status(500).send({ message: 'Cannot delete this company' });
+        return res.send({ message: 'Company deleted' });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err);
+    }
+}
