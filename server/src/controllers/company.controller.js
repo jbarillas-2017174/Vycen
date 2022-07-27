@@ -1,6 +1,7 @@
 'use strict'
 
 const Company = require('../models/company');
+const Product = require('../models/products');
 const { validateData } = require("../utils/validate");
 
 exports.createCompany = async (req, res) => {
@@ -73,6 +74,10 @@ exports.deleteCompany = async (req, res) => {
         if (!company) return res.status(404).send({ message: 'Company not found' });
         const deleteC = await Company.findOneAndDelete({ _id: companyId });
         if (!deleteC) return res.status(500).send({ message: 'Cannot delete this company' });
+        const products = await Product.find({ company: companyId });
+        for (let p of products) {
+            await Product.findOneAndDelete({ _id: p._id });
+        }
         return res.send({ message: 'Company deleted' });
     } catch (err) {
         console.log(err);
