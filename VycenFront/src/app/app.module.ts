@@ -15,6 +15,9 @@ import { UsersComponent } from './components/users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ForumComponent } from './components/forum/forum.component';
+import { ProductComponent } from './components/product/product.component';
+import { SeeProductsComponent } from './components/see-products/see-products.component';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { ForumComponent } from './components/forum/forum.component';
     CompanyComponent,
     UsersComponent,
     ForumComponent,
+    FooterComponent,
+    ProductComponent,
+    SeeProductsComponent,
   ],
   imports: [
     BrowserModule,
