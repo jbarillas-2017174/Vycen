@@ -57,7 +57,7 @@ exports.updateCompany = async (req, res) => {
         const company = await Company.findOne({ _id: companyId });
         if (!company) return res.status(404).send({ message: 'Company not found' });
         const exist = await Company.findOne({ name: params.name });
-        if (!exist) return res.status(404).send({ message: 'Name in use' });
+        if (exist) return res.status(404).send({ message: 'Name in use' });
         const update = await Company.findByIdAndUpdate({ _id: companyId }, params, { new: true });
         if (!update) return res.status(500).send({ message: 'Cannot update this company' });
         return res.send({ message: 'Company updated' });
