@@ -65,8 +65,11 @@
                                     <div class="col-md-6 mb-4 pb-2">
 
                                         <div class="form__group field">
-                                            <input [(ngModel)]="user.country" name="country" required=""
-                                                placeholder="Name" class="form__field" type="input">
+                                            <select [(ngModel)]="user.country" name="country" required=""
+                                                placeholder="Name" class="form__field text-white" type="select">
+                                                <option *ngFor="let c of countries" value="{{c.name}}" class="text-dark">{{c.name}}</option>
+                                            </select>
+
                                             <label class="form__label" for="name">Country</label>
                                         </div>
 

@@ -84,8 +84,7 @@ exports.deleteAccount = async (req, res) => {
         if (!already) return res.status(404).send({ message: 'Account does not exist' });
         if (accountId != req.user.sub) return res.status(403).send({ message: 'Unauthorized to delete this account' });
         const user = await User.findOneAndDelete({ _id: accountId });
-        if (user) return res.send(500).send({ message: 'Cannot delete this account' })
-        else return res.status(500).send({ message: 'Cannot delete this account' });
+        return res.send({ message: 'Account deleted' });
     } catch (err) {
         console.log(err);
         return res.status(500).send(err);
@@ -135,9 +134,12 @@ exports.createUser = async (req, res) => {
         const params = req.body;
         const data = {
             name: params.name,
+            lastName: params.lastName,
             username: params.username,
             email: params.email,
             password: params.password,
+            phone: params.phone,
+            country: params.country,
             role: params.role
         }
         const msg = await validateData(data);

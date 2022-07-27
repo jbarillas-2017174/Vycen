@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { countryModel } from 'src/app/model/countries.model';
+import { UserModel } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/userRest/user.service';
 import Swal from 'sweetalert2'
 
@@ -8,6 +11,9 @@ import Swal from 'sweetalert2'
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+  user: UserModel
+  countries: any
 
   swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -19,8 +25,12 @@ export class ProfileComponent implements OnInit {
   account: any
 
   constructor(
-    private userRest: UserService
-  ) { }
+    private userRest: UserService,
+    private router: Router
+  ) {
+    this.user = new UserModel('', '', '', '', '', '', '', '', '');
+    this.countries = countryModel
+  }
 
   ngOnInit(): void {
     this.getAccount()
@@ -40,11 +50,25 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-
-
-  delete() {
-    console.log('hola')
+  updateAccount() {
+    this.userRest.updateAccount(this.account).subscribe({
+      next: (res: any) => {
+        Swal.fire({
+          title: res.message,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      },
+      error: (err) => Swal.fire({
+        title: err.error.message || err.error,
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2000
+      })
+    })
   }
+
   deleteAccount() {
     Swal.fire({
       title: 'Are you sure to delete your account?',
@@ -56,12 +80,26 @@ export class ProfileComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your account has been deleted.',
-          'success'
-        )
-        this.delete()
+        this.userRest.deleteAccount().subscribe({
+          next: (res: any) => {
+            Swal.fire(
+              'Deleted!',
+              'Your account has been deleted.',
+              'success'
+            )
+            localStorage.removeItem('token');
+            localStorage.removeItem('identity');
+            this.router.navigateByUrl('/')
+          },
+          error: (err) => Swal.fire({
+            title: err.error.message,
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2000
+          })
+        })
+
+
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel

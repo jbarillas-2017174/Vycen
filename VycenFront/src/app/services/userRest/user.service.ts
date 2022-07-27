@@ -25,6 +25,30 @@ export class UserService {
     return this.http.get(environment.baseUrl + 'user/getUser/' + id, { headers: this.httpOptions });
   }
 
+  getUsers() {
+    return this.http.get(environment.baseUrl + 'user/getUsers', { headers: this.httpOptions })
+  }
+
+  createUser(params: {}) {
+    return this.http.post(environment.baseUrl + 'user/createUser', params, { headers: this.httpOptions })
+  }
+
+  updateUser(id: String, params: {}) {
+    return this.http.put(environment.baseUrl + 'user/updateUSer/' + id, params, { headers: this.httpOptions });
+  }
+
+  deleteUser(id: String) {
+    return this.http.delete(environment.baseUrl + 'user/deleteUser/' + id, { headers: this.httpOptions })
+  }
+
+  updateAccount(params: {}) {
+    return this.http.put(environment.baseUrl + 'user/updateAccount', params, { headers: this.httpOptions });
+  }
+
+  deleteAccount() {
+    return this.http.delete(environment.baseUrl + 'user/deleteAccount', { headers: this.httpOptions });
+  }
+
   getToken() {
     let globalToken = localStorage.getItem('token');
     let token;
