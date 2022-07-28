@@ -94,10 +94,11 @@ exports.getCart = async (req, res) => {
 exports.pay = async (req, res) => {
     try {
         const userId = req.user.sub;
+        const exist = await Cart.findOne({user: userId});
         const cart = await Cart.find({ user: userId })
             .populate({ path: 'user', select: '-password -phone -role -_id' })
             .populate({ path: 'product', select: '-date -_id', populate: 'company' });
-        if (!cart) return res.status(404).send({ message: 'Your cart does not exist' });
+        if (!exist) return res.status(404).send({ message: 'Your cart does not exist' });
         let total = 0;
         for (let t of cart) {
             total += t.subtotal

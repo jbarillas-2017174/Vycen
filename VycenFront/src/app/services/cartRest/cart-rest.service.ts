@@ -24,4 +24,12 @@ export class CartRestService {
   quitProductCart(id: String) {
     return this.http.post(environment.baseUrl + 'cart/quitProduct/' + id, '', { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
   }
+
+  getCart() {
+    return this.http.get(environment.baseUrl + 'cart/getcart', { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) })
+  }
+
+  pay() {
+    return this.http.delete(environment.baseUrl + 'cart/pay', { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) })
+  }
 }
