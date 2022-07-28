@@ -9,8 +9,7 @@ import { UserService } from '../userRest/user.service';
 export class CartRestService {
 
   httpOptions = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': this.userRest.getToken()
+    'Content-Type': 'application/json'
   })
 
   constructor(
@@ -19,10 +18,10 @@ export class CartRestService {
   ) { }
 
   addProductCart(id: String) {
-    return this.http.post(environment.baseUrl + 'cart/addProduct/' + id, '', { headers: this.httpOptions });
+    return this.http.post(environment.baseUrl + 'cart/addProduct/' + id, '', { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
   }
 
   quitProductCart(id: String) {
-    return this.http.post(environment.baseUrl + 'cart/quitProduct/' + id, '', { headers: this.httpOptions });
+    return this.http.post(environment.baseUrl + 'cart/quitProduct/' + id, '', { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
   }
 }

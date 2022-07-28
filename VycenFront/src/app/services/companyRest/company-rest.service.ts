@@ -9,8 +9,7 @@ import { UserService } from '../userRest/user.service';
 export class CompanyRestService {
 
   httpOptions = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': this.userRest.getToken()
+    'Content-Type': 'application/json'
   })
 
   constructor(
@@ -31,10 +30,10 @@ export class CompanyRestService {
   }
 
   updateCompany(id: String, params: {}) {
-    return this.http.put(environment.baseUrl + 'company/updateCompany/' + id, params, { headers: this.httpOptions });
+    return this.http.put(environment.baseUrl + 'company/updateCompany/' + id, params, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
   }
 
   deleteCompany(id: String) {
-    return this.http.delete(environment.baseUrl + 'company/deleteCompany/' + id, { headers: this.httpOptions });
+    return this.http.delete(environment.baseUrl + 'company/deleteCompany/' + id, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
   }
 }

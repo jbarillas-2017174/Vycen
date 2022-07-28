@@ -12,7 +12,7 @@ api.get('/getProduct/:id', productController.getProduct);
 //admin
 api.post('/createProduct', [mdAuth.ensureAuth, mdAuth.isAdmin], productController.createProduct);
 api.put('/updateProduct/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], productController.updateProduct);
-api.delete('/delete/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], productController.deleteProduct);
+api.delete('/deleteProduct/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], productController.deleteProduct);
 
 
 module.exports = api;

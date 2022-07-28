@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  httpOptions = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', this.getToken());
+  httpOptions = new HttpHeaders().set('Content-Type', 'application/json')
 
   constructor(
     private http: HttpClient
@@ -22,31 +22,31 @@ export class UserService {
   }
 
   getUser(id: String) {
-    return this.http.get(environment.baseUrl + 'user/getUser/' + id, { headers: this.httpOptions });
+    return this.http.get(environment.baseUrl + 'user/getUser/' + id, { headers: this.httpOptions.set('Authorization', this.getToken()) });
   }
 
   getUsers() {
-    return this.http.get(environment.baseUrl + 'user/getUsers', { headers: this.httpOptions })
+    return this.http.get(environment.baseUrl + 'user/getUsers', { headers: this.httpOptions.set('Authorization', this.getToken()) })
   }
 
   createUser(params: {}) {
-    return this.http.post(environment.baseUrl + 'user/createUser', params, { headers: this.httpOptions })
+    return this.http.post(environment.baseUrl + 'user/createUser', params, { headers: this.httpOptions.set('Authorization', this.getToken()) })
   }
 
   updateUser(id: String, params: {}) {
-    return this.http.put(environment.baseUrl + 'user/updateUSer/' + id, params, { headers: this.httpOptions });
+    return this.http.put(environment.baseUrl + 'user/updateUSer/' + id, params, { headers: this.httpOptions.set('Authorization', this.getToken()) });
   }
 
   deleteUser(id: String) {
-    return this.http.delete(environment.baseUrl + 'user/deleteUser/' + id, { headers: this.httpOptions })
+    return this.http.delete(environment.baseUrl + 'user/deleteUser/' + id, { headers: this.httpOptions.set('Authorization', this.getToken()) })
   }
 
   updateAccount(params: {}) {
-    return this.http.put(environment.baseUrl + 'user/updateAccount', params, { headers: this.httpOptions });
+    return this.http.put(environment.baseUrl + 'user/updateAccount', params, { headers: this.httpOptions.set('Authorization', this.getToken()) });
   }
 
   deleteAccount() {
-    return this.http.delete(environment.baseUrl + 'user/deleteAccount', { headers: this.httpOptions });
+    return this.http.delete(environment.baseUrl + 'user/deleteAccount', { headers: this.httpOptions.set('Authorization', this.getToken()) });
   }
 
   getToken() {
