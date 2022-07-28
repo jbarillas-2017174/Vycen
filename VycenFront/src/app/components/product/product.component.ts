@@ -3,6 +3,7 @@ import { ProductModel } from 'src/app/model/product.model';
 import { CartRestService } from 'src/app/services/cartRest/cart-rest.service';
 import { CompanyRestService } from 'src/app/services/companyRest/company-rest.service';
 import { ProductService } from 'src/app/services/productRest/product.service';
+import { UserService } from 'src/app/services/userRest/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,13 +16,16 @@ export class ProductComponent implements OnInit {
   company: any
   searchCompany: any
   product: ProductModel
+  identity: any
 
   constructor(
     private productRest: ProductService,
     private companyRest: CompanyRestService,
-    private cartRest: CartRestService
+    private cartRest: CartRestService,
+    private userRest: UserService
   ) {
     this.product = new ProductModel('', '', '', '', 0, new Date(), '');
+    this.identity = userRest.getIdentity().role
   }
 
   ngOnInit(): void {

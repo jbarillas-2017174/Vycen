@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 <div class="container-fluid mt-2 ms-2">
-    <div class="text-center m-5">
+    <div class="text-center m-5" *ngIf="identity == 'ADMIN'">
         <button class="buttonA" data-bs-toggle="modal" data-bs-target="#addProduct">Add</button>
     </div>
 
