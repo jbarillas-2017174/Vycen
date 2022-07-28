@@ -62,6 +62,8 @@ exports.updateAccount = async (req, res) => {
     try {
         const accountId = req.user.sub;
         const params = req.body;
+        const adminA = await User.findOne({username: 'admin'});
+        if(adminA) return res.status(401).send({message: 'Can\'t update this account'})
         if (accountId != req.user.sub) return res.status(403).send({ message: 'Unauthorized to update this account' })
         if (params.password) return res.status(400).send({ message: 'Cannot update the password' });
         const already = await User.findOne({ _id: accountId });
@@ -81,6 +83,8 @@ exports.deleteAccount = async (req, res) => {
     try {
         const accountId = req.user.sub;
         const already = await User.findOne({ _id: accountId });
+        const adminA = await User.findOne({username: 'admin'});
+        if(adminA) return res.status(401).send({message: 'Can\'t delete this account'})
         if (!already) return res.status(404).send({ message: 'Account does not exist' });
         if (accountId != req.user.sub) return res.status(403).send({ message: 'Unauthorized to delete this account' });
         const user = await User.findOneAndDelete({ _id: accountId });
@@ -163,6 +167,8 @@ exports.updateUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const params = req.body;
+        const adminA = await User.findOne({username: 'admin'});
+        if(adminA) return res.status(401).send({message: 'Can\'t update this account'})
         if (params.password) return res.status(403).send({ message: 'Cannot update password' });
         const already = await User.findOne({ _id: userId });
         const alreadyUser = await User.findOne({ username: params.username })
@@ -180,6 +186,8 @@ exports.deleteUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const already = await User.findOne({ _id: userId })
+        const adminA = await User.findOne({username: 'admin'});
+        if(adminA) return res.status(401).send({message: 'Can\'t delete this account'})
         if (!already) return res.status(404).send({ message: 'User not found' });
         if (already.role == 'CLIENT') {
             const deleteUser = await User.findOneAndDelete({ _id: userId });

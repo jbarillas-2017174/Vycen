@@ -11,6 +11,8 @@ import { UsersComponent } from './components/users/users.component';
 import { ProductComponent } from './components/product/product.component';
 import { SeeProductsComponent } from './components/see-products/see-products.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ClientGuard } from './guards/client.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,11 +21,11 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'seeProducts/:id', component: SeeProductsComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'company', component: CompanyComponent },
-  { path: 'users', component: UsersComponent },
+  { path: 'profile', canActivate: [ClientGuard, AdminGuard], component: ProfileComponent },
+  { path: 'company', canActivate: [AdminGuard], component: CompanyComponent },
+  { path: 'users', canActivate: [AdminGuard], component: UsersComponent },
   { path: 'forum', component: ForumComponent },
-  { path: 'shoppingCart', component: ShoppingCartComponent},
+  { path: 'shoppingCart', canActivate: [ClientGuard], component: ShoppingCartComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

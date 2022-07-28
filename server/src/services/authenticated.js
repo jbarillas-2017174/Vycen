@@ -6,7 +6,7 @@ const secretKey = 'Kjs1yZ23';
 
 exports.ensureAuth = async(req, res, next)=>{
     if(!req.headers.authorization){
-        return res.status(403).send({message: 'Authorization header is needed'});
+        return res.status(403).send({message: 'You need to be logged in first'});
     }else{
         try{
             var token = req.headers.authorization.replace(/['"]+/g, '');
@@ -27,6 +27,17 @@ exports.isAdmin = async(req, res, next)=>{
         const user = req.user;
         if(user.role === 'ADMIN') return next();
         else return res.status(403).send({message: 'User unauthorized'});
+    }catch(err){
+        console.log(err);
+        return err;
+    }
+}
+
+exports.isClient = async(req, res, next)=>{
+    try{
+        const user = req.user;
+        if(user.role === 'CLIENT') return next();
+        else return res.status(403).send({message: 'Only clients can do this actions'});
     }catch(err){
         console.log(err);
         return err;
