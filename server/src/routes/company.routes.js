@@ -9,4 +9,8 @@ api.post('/createCompany', companyController.createCompany);
 api.get('/getCompanies', companyController.getCompanies);
 api.get('/getCompany/:id', companyController.getCompany);
 
+//admin
+api.put('/updateCompany/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], companyController.updateCompany)
+api.delete('/deleteCompany/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], companyController.deleteCompany);
+
 module.exports = api;

@@ -3,6 +3,7 @@ import { UserModel } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/userRest/user.service';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { countryModel } from 'src/app/model/countries.model';
 
 @Component({
   selector: 'app-register',
@@ -11,12 +12,14 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   user: UserModel
+  countries: any
 
   constructor(
     private userRest: UserService,
     private router: Router
   ) {
     this.user = new UserModel('', '', '', '', '', '', '', '', '');
+    this.countries = countryModel
   }
 
   ngOnInit(): void {

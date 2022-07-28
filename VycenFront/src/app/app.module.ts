@@ -14,6 +14,12 @@ import { CompanyComponent } from './components/company/company.component';
 import { UsersComponent } from './components/users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ForumComponent } from './components/forum/forum.component';
+import { ProductComponent } from './components/product/product.component';
+import { SeeProductsComponent } from './components/see-products/see-products.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +33,12 @@ import { FormsModule } from '@angular/forms';
     NotFoundComponent,
     CompanyComponent,
     UsersComponent,
+    ForumComponent,
+    FooterComponent,
+    ProductComponent,
+    SeeProductsComponent,
+    SearchPipe,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,

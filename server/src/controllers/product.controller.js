@@ -49,3 +49,32 @@ exports.getProduct = async (req, res) => {
         return res.status(500).send(err)
     }
 }
+
+exports.updateProduct = async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const params = req.body;
+        const product = await Product.findOne({ _id: productId });
+        if (!product) return res.status(404).send({ message: 'Product not found' });
+        const update = await Product.findByIdAndUpdate({ _id: productId }, params, { new: true });
+        if (!update) return res.status(500).send({ message: 'Cannot update this product' });
+        return res.send({ message: 'Product updated' });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err);
+    }
+}
+
+exports.deleteProduct = async (req, res) => {
+    try {
+        const productID = req.params.id;
+        const product = await Product.findOne({ _id: productID });
+        if (!product) return res.status(404).send({ message: 'Product not found' });
+        const deleteC = await Product.findOneAndDelete({ _id: productID });
+        if (!deleteC) return res.status(500).send({ message: 'Cannot delete this product' });
+        return res.send({ message: 'Product deleted' });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err);
+    }
+}

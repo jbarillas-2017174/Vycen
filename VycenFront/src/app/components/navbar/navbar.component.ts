@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/userRest/user.service';
 })
 export class NavbarComponent implements OnInit {
   identity:any
+  role:any
 
   constructor(
     private router: Router,
@@ -16,7 +17,8 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.identity = this.userRest.getIdentity()
+    this.identity = this.userRest.getIdentity();
+    this.role = this.userRest.getIdentity().role;
   }
 
   logOut() {
