@@ -8,8 +8,7 @@ import { UserService } from '../userRest/user.service';
 })
 export class ProductService {
   httpOptions = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': this.userRest.getToken()
+    'Content-Type': 'application/json'
   })
 
   constructor(
@@ -24,4 +23,18 @@ export class ProductService {
   getProduct(id: String) {
     return this.http.get(environment.baseUrl + 'product/getProduct/' + id, { headers: this.httpOptions });
   }
+
+  createProduct(params: {}) {
+    return this.http.post(environment.baseUrl + 'product/createProduct', params, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
+  }
+
+  updateProduct(id: String, params: {}) {
+    return this.http.put(environment.baseUrl + 'product/updateProduct/' + id, params, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
+  }
+
+  deleteProduct(id: String) {
+    return this.http.delete(environment.baseUrl + 'product/deleteProduct/' + id, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
+  }
+
 }
+

@@ -72,18 +72,25 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input [(ngModel)]="account.name" id="name" name="name" placeholder="Name" type="text" class="input m-2" required="">
-                <input [(ngModel)]="account.lastName" name="lastName" placeholder="Last Name" type="text" class="input m-2 ms-3" required="">
-                <input [(ngModel)]="account.username" name="username" placeholder="Username" type="text" class="input m-2" required="">
-                <input [(ngModel)]="account.email" name="email" placeholder="Email" type="text" class="input m-2 ms-3" required="">
-                <input [(ngModel)]="account.phone" name="phone" placeholder="Phone" type="text" class="input m-2" required="">
-                <select [(ngModel)]="account.country" name="country" style="max-width: 40%;" placeholder="Country" type="text" class="input m-2 ms-3" required="">
+                <input [(ngModel)]="account.name" id="name" name="name" placeholder="Name" type="text" class="input m-2"
+                    required="">
+                <input [(ngModel)]="account.lastName" name="lastName" placeholder="Last Name" type="text"
+                    class="input m-2 ms-3" required="">
+                <input [(ngModel)]="account.username" name="username" placeholder="Username" type="text"
+                    class="input m-2" required="">
+                <input [(ngModel)]="account.email" name="email" placeholder="Email" type="text" class="input m-2 ms-3"
+                    required="">
+                <input [(ngModel)]="account.phone" name="phone" placeholder="Phone" type="text" class="input m-2"
+                    required="">
+                <select [(ngModel)]="account.country" name="country" style="max-width: 40%;" placeholder="Country"
+                    type="text" class="input m-2 ms-3" required="">
                     <option *ngFor="let c of countries" value="{{c.name}}" class="text-dark">{{c.name}}</option>
                 </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateAccount()">Save</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="updateAccount()">Save</button>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartRestService } from 'src/app/services/cartRest/cart-rest.service';
+import { CompanyRestService } from 'src/app/services/companyRest/company-rest.service';
 import { ProductService } from 'src/app/services/productRest/product.service';
 import { UserService } from 'src/app/services/userRest/user.service';
 import Swal from 'sweetalert2';
@@ -19,7 +20,8 @@ export class SeeProductsComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     private productRest: ProductService,
     private userRest: UserService,
-    private cartRest: CartRestService
+    private cartRest: CartRestService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +31,7 @@ export class SeeProductsComponent implements OnInit {
     this.getProduct(this.idProduct)
     this.identity = this.userRest.getIdentity().role;
   }
+
 
   getProduct(id: String) {
     this.productRest.getProduct(id).subscribe({
@@ -87,5 +90,71 @@ export class SeeProductsComponent implements OnInit {
       }
     })
   }
+
+  updateProduct() {
+    this.productRest.updateProduct(this.idProduct, this.productInfo).subscribe({
+      next: (res: any) => {
+        Swal.fire({
+          title: res.message,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      },
+      error: (err) => {
+        Swal.fire({
+          title: err.error.message || err.error,
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2000
+        })
+      }
+    })
+  }
+
+  deleteProduct(id: String) {
+    Swal.fire({
+      title: 'Are you sure to delete this product?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productRest.deleteProduct(id).subscribe({
+          next: (res: any) => {
+            Swal.fire(
+              'Deleted',
+              'The product has been deleted.',
+              'success'
+            )
+            this.router.navigateByUrl('/product')
+          },
+          error: (err) => Swal.fire({
+            title: err.error.message || err.error,
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2000
+          })
+        })
+
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire({
+          title: 'Canceled',
+          text: 'Your account is safe',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 2000
+        })
+      }
+    })
+  }
+
 
 }

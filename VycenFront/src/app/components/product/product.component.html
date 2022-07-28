@@ -1,13 +1,8 @@
 <app-navbar></app-navbar>
 
 <div class="container-fluid mt-2 ms-2">
-    <div class="btn-group mt-4 justify-content-right" role="group" aria-label="Basic radio toggle button group">
-        <div *ngFor="let s of sex">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-            <label class="btn btn-outline-info" for="btnradio1">{{s.type}}</label>
-        </div>
-
-
+    <div class="text-center m-5">
+        <button class="buttonA" data-bs-toggle="modal" data-bs-target="#addProduct">Add</button>
     </div>
 
     <div class="container">
@@ -54,3 +49,40 @@
 
 
 <app-footer></app-footer>
+
+
+<!--Modal create-->
+<div class="modal fade" id="addProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Create Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form #addProduct="ngForm">
+                    <input [(ngModel)]="product.name" name="name" placeholder="Name" type="text" class="input m-2"
+                        required="">
+                    <input [(ngModel)]="product.size" name="size" placeholder="Size" type="text" class="input m-2 ms-3"
+                        maxlength="1" required="">
+                    <input [(ngModel)]="product.sex" name="sex" placeholder="Sex" type="text" class="input m-2"
+                        required="">
+                    <input [(ngModel)]="product.price" name="price" placeholder="price" type="number"
+                        class="input m-2 ms-3" required="">
+                    <select [(ngModel)]="product.company" name="company" style="width: 100%; max-width: 11.5rem;" placeholder="Company" type="text"
+                        class="input m-2 ms-3" required="">
+                        <option selected disabled>Company</option>
+                        <option class="text-dark" *ngFor="let c of company" value="{{c._id}}">{{c.name}}</option>
+                    </select>
+                    <input name="date" placeholder="Date" type="date" class="input m-2" required="">
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createProduct(addProduct)">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
