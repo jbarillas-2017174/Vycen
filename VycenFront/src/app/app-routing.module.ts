@@ -10,6 +10,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UsersComponent } from './components/users/users.component';
 import { ProductComponent } from './components/product/product.component';
 import { SeeProductsComponent } from './components/see-products/see-products.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'company', component: CompanyComponent },
   { path: 'users', component: UsersComponent },
   { path: 'forum', component: ForumComponent },
+  { path: 'shoppingCart', component: ShoppingCartComponent},
   { path: '**', component: NotFoundComponent }
 ];
 

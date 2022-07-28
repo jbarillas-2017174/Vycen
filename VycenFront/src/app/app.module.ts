@@ -19,6 +19,7 @@ import { ProductComponent } from './components/product/product.component';
 import { SeeProductsComponent } from './components/see-products/see-products.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { SearchSexPipe } from './pipes/search-sex.pipe';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { SearchSexPipe } from './pipes/search-sex.pipe';
     SeeProductsComponent,
     SearchPipe,
     SearchSexPipe,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,
