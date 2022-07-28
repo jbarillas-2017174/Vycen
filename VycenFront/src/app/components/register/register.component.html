@@ -8,13 +8,14 @@
                         style="border-radius: 1rem; background-color:  rgba(39, 50, 60, 0.7); border-color: transparent;">
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center ">Register</h3>
-                            <form>
+                            <form #registerForm="ngForm">
 
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form__group field">
-                                            <input required="" placeholder="Name" class="form__field" type="input">
+                                            <input [(ngModel)]="user.name" name="name" required="" placeholder="Name"
+                                                class="form__field" type="input">
                                             <label class="form__label" for="name">Name</label>
                                         </div>
 
@@ -22,7 +23,8 @@
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form__group field">
-                                            <input required="" placeholder="Name" class="form__field" type="input">
+                                            <input [(ngModel)]="user.lastName" name="lastname" required=""
+                                                placeholder="Name" class="form__field" type="input">
                                             <label class="form__label" for="name">Last Name</label>
                                         </div>
 
@@ -33,7 +35,8 @@
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form__group field">
-                                            <input required="" placeholder="Name" class="form__field" type="input">
+                                            <input [(ngModel)]="user.username" name="username" required=""
+                                                placeholder="Name" class="form__field" type="input">
                                             <label class="form__label" for="name">Username</label>
                                         </div>
 
@@ -41,7 +44,8 @@
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form__group field">
-                                            <input required="" placeholder="Name" class="form__field" type="input">
+                                            <input [(ngModel)]="user.phone" name="phone" required="" placeholder="Name"
+                                                class="form__field" type="input">
                                             <label class="form__label" for="name">Phone</label>
                                         </div>
 
@@ -52,7 +56,8 @@
                                     <div class="col-md-6 mb-4 pb-2">
 
                                         <div class="form__group field">
-                                            <input required="" placeholder="Name" class="form__field" type="input">
+                                            <input [(ngModel)]="user.email" name="email" required="" placeholder="Name"
+                                                class="form__field" type="input">
                                             <label class="form__label" for="name">Email</label>
                                         </div>
 
@@ -60,8 +65,12 @@
                                     <div class="col-md-6 mb-4 pb-2">
 
                                         <div class="form__group field">
-                                            <input required="" placeholder="Name" class="form__field" type="input">
-                                            <label class="form__label" for="name">Address</label>
+                                            <select [(ngModel)]="user.country" name="country" required=""
+                                                placeholder="Name" class="form__field text-white" type="select">
+                                                <option *ngFor="let c of countries" value="{{c.name}}" class="text-dark">{{c.name}}</option>
+                                            </select>
+
+                                            <label class="form__label" for="name">Country</label>
                                         </div>
 
                                     </div>
@@ -71,7 +80,8 @@
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form__group field">
-                                            <input required="" placeholder="Name" class="form__field" type="password">
+                                            <input [(ngModel)]="user.password" name="password" required=""
+                                                placeholder="Name" class="form__field" type="password">
                                             <label class="form__label" for="name">Password</label>
                                         </div>
 
@@ -93,7 +103,7 @@
                                         <span>Return</span>
                                     </button>
 
-                                    <button class="mb-4 ms-3">
+                                    <button type="submit" class="mb-4 ms-3" (click)="register(registerForm)">
                                         <div class="svg-wrapper-1">
                                             <div class="svg-wrapper">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"

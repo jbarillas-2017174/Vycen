@@ -8,8 +8,17 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CompanyComponent } from './components/company/company.component';
+import { UsersComponent } from './components/users/users.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ForumComponent } from './components/forum/forum.component';
 import { ProductComponent } from './components/product/product.component';
 import { SeeProductsComponent } from './components/see-products/see-products.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -20,12 +29,22 @@ import { SeeProductsComponent } from './components/see-products/see-products.com
     LoginComponent,
     RegisterComponent,
     FooterComponent,
+    ProfileComponent,
+    NotFoundComponent,
+    CompanyComponent,
+    UsersComponent,
+    ForumComponent,
+    FooterComponent,
     ProductComponent,
     SeeProductsComponent,
+    SearchPipe,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

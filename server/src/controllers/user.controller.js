@@ -1,102 +1,109 @@
 'user strict'
 
-const {validateData, encrypt, searchUser, checkPass} = require('../utils/validate');
+const { validateData, encrypt, searchUser, checkPass } = require('../utils/validate');
 const User = require('../models/user');
 const jwt = require('../services/jwt');
 
-exports.test = async(req, res)=>{
-    return res.send({message: 'Si sirve :=)'});
+exports.test = async (req, res) => {
+    return res.send({ message: 'Si sirve :=)' });
 }
 
-exports.register = async(req, res)=>{
-    try{
+exports.register = async (req, res) => {
+    try {
         const params = req.body;
         const data = {
             name: params.name,
+            lastName: params.lastName,
             username: params.username,
+            country: params.country,
+            phone: params.phone,
             email: params.email,
             password: params.password,
             role: 'CLIENT'
         }
         const msg = validateData(data);
-        if(msg) return res.status(400).send(msg);
-        if(data.role != 'CLIENT') return res.status(403).send({message: 'Unauthorized action'});
-        const already = await User.findOne({username: params.username})
-        if(already) return res.status(400).send({message: 'Username already in use'})
+        if (msg) return res.status(400).send(msg);
+        if (data.role != 'CLIENT') return res.status(403).send({ message: 'Unauthorized action' });
+        if (!params.email.endsWith('@gmail.com')) return res.status(400).send({ message: 'Invalid Email' });
+        const already = await User.findOne({ username: params.username })
+        if (already) return res.status(400).send({ message: 'Username already in use' })
         data.password = await encrypt(params.password);
         const user = new User(data);
         await user.save();
-        return res.send({message: 'User created'})
-    }catch(err){
+        return res.send({ message: 'User created' })
+    } catch (err) {
         console.log(err);
         return res.status(500).send(err);
     }
 }
 
-exports.login = async(req, res)=>{
-    try{
+exports.login = async (req, res) => {
+    try {
         const params = req.body;
         const data = {
             username: params.username,
             password: params.password
         }
         const msg = await validateData(data);
-        if(msg) return res.status(400).send(msg);
+        if (msg) return res.status(400).send(msg);
         const already = await searchUser(data.username);
-        if(already && await checkPass(data.password, already.password)){
+        if (already && await checkPass(data.password, already.password)) {
             const token = await jwt.createToken(already);
             delete already.password;
-            return res.send({token, message: 'Welcome!', already});
-        }else return res.status(401).send({message: 'Wrong user or password'});
-    }catch(err){
+            return res.send({ token, message: 'Welcome!', already });
+        } else return res.status(401).send({ message: 'Wrong user or password' });
+    } catch (err) {
         console.log(err);
         return res.status(500).send(err);
     }
 }
 
-exports.updateAccount = async(req, res)=>{
-    try{
+exports.updateAccount = async (req, res) => {
+    try {
         const accountId = req.user.sub;
         const params = req.body;
-        if(accountId != req.user.sub) return res.status(403).send({message: 'Unauthorized to update this account'})
-        if(params.password) return res.status(400).send({message: 'Cannot update the password'});
-        const already = await User.findOne({_id: accountId});
-        const alreadyUser = await User.findOne({username: params.username})
-        if(!already) return res.status(404).send({message: 'Account does not exist'});
-        if(alreadyUser) return res.status(400).send({message: 'Username already in use'});
-        const user = await User.findOneAndUpdate({_id: accountId}, params, {new: true});
-        if(user) return res.send({message: 'Account updated'});
-        else return res.status(500).send({message: 'Cabbit update this account'});
-    }catch(err){
+        const adminA = await User.findOne({username: 'admin'});
+        if(adminA) return res.status(401).send({message: 'Can\'t update this account'})
+        if (accountId != req.user.sub) return res.status(403).send({ message: 'Unauthorized to update this account' })
+        if (params.password) return res.status(400).send({ message: 'Cannot update the password' });
+        const already = await User.findOne({ _id: accountId });
+        const alreadyUser = await User.findOne({ username: params.username })
+        if (!already) return res.status(404).send({ message: 'Account does not exist' });
+        if (alreadyUser) return res.status(400).send({ message: 'Username already in use' });
+        const user = await User.findOneAndUpdate({ _id: accountId }, params, { new: true });
+        if (user) return res.send({ message: 'Account updated' });
+        else return res.status(500).send({ message: 'Cabbit update this account' });
+    } catch (err) {
         console.log(err);
         return res.status(500).send(err);
     }
 }
 
-exports.deleteAccount = async(req, res)=>{
-    try{
+exports.deleteAccount = async (req, res) => {
+    try {
         const accountId = req.user.sub;
-        const already  = await User.findOne({_id: accountId});
-        if(!already) return res.status(404).send({message: 'Account does not exist'});
-        if(accountId != req.user.sub) return res.status(403).send({message: 'Unauthorized to delete this account'});
-        const user = await User.findOneAndDelete({_id: accountId});
-        if(user) return res.send(500).send({message: 'Cannot delete this account'})
-        else return res.status(500).send({message: 'Cannot delete this account'});
-    }catch(err){
+        const already = await User.findOne({ _id: accountId });
+        const adminA = await User.findOne({username: 'admin'});
+        if(adminA) return res.status(401).send({message: 'Can\'t delete this account'})
+        if (!already) return res.status(404).send({ message: 'Account does not exist' });
+        if (accountId != req.user.sub) return res.status(403).send({ message: 'Unauthorized to delete this account' });
+        const user = await User.findOneAndDelete({ _id: accountId });
+        return res.send({ message: 'Account deleted' });
+    } catch (err) {
         console.log(err);
         return res.status(500).send(err);
     }
 }
 
-exports.getAccount = async(req, res)=>{
-    try{
+exports.getAccount = async (req, res) => {
+    try {
         const accountId = req.user.sub;
-        const already = await User.findOne({_id: accountId})
-        if(!already) return res.status(404).send({message: 'Account does not exist'});
-        if(accountId != req.user.sub) return res.status(403).send({message: 'This account is not yours'});
-        const user = await User.findOne({_id: accountId});
-        return res.send({message: 'Your account', user});
-    }catch(err){
+        const already = await User.findOne({ _id: accountId })
+        if (!already) return res.status(404).send({ message: 'Account does not exist' });
+        if (accountId != req.user.sub) return res.status(403).send({ message: 'This account is not yours' });
+        const user = await User.findOne({ _id: accountId });
+        return res.send({ message: 'Your account', user });
+    } catch (err) {
         console.log(err);
         return res.status(500).send(err);
     }
@@ -131,9 +138,12 @@ exports.createUser = async (req, res) => {
         const params = req.body;
         const data = {
             name: params.name,
+            lastName: params.lastName,
             username: params.username,
             email: params.email,
             password: params.password,
+            phone: params.phone,
+            country: params.country,
             role: params.role
         }
         const msg = await validateData(data);
@@ -157,6 +167,8 @@ exports.updateUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const params = req.body;
+        const adminA = await User.findOne({username: 'admin'});
+        if(adminA) return res.status(401).send({message: 'Can\'t update this account'})
         if (params.password) return res.status(403).send({ message: 'Cannot update password' });
         const already = await User.findOne({ _id: userId });
         const alreadyUser = await User.findOne({ username: params.username })
@@ -174,6 +186,8 @@ exports.deleteUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const already = await User.findOne({ _id: userId })
+        const adminA = await User.findOne({username: 'admin'});
+        if(adminA) return res.status(401).send({message: 'Can\'t delete this account'})
         if (!already) return res.status(404).send({ message: 'User not found' });
         if (already.role == 'CLIENT') {
             const deleteUser = await User.findOneAndDelete({ _id: userId });
@@ -184,5 +198,23 @@ exports.deleteUser = async (req, res) => {
     } catch (err) {
         console.log(err);
         return res.status(500).send(err);
+    }
+}
+
+exports.createAdmin = async (req, res) => {
+    try {
+        if (await User.find() == '' || !await User.findOne({ username: 'admin' })) {
+            const data = {
+                username: 'admin',
+                password: '123',
+                role: 'ADMIN'
+            }
+            data.password = await encrypt(data.password)
+            const admin = new User(data);
+            await admin.save();
+        }
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err)
     }
 }
