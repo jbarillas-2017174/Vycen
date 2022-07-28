@@ -18,6 +18,7 @@ import { ForumComponent } from './components/forum/forum.component';
 import { ProductComponent } from './components/product/product.component';
 import { SeeProductsComponent } from './components/see-products/see-products.component';
 import { SearchPipe } from './pipes/search.pipe';
+import { SearchSexPipe } from './pipes/search-sex.pipe';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { SearchPipe } from './pipes/search.pipe';
     ProductComponent,
     SeeProductsComponent,
     SearchPipe,
+    SearchSexPipe,
   ],
   imports: [
     BrowserModule,

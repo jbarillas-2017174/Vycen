@@ -6,7 +6,8 @@ import { UserService } from '../userRest/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class CartRestService {
+
   httpOptions = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': this.userRest.getToken()
@@ -17,11 +18,11 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
-  getProducts() {
-    return this.http.get(environment.baseUrl + 'product/getProducts', { headers: this.httpOptions });
+  addProductCart(id: String) {
+    return this.http.post(environment.baseUrl + 'cart/addProduct/' + id, '', { headers: this.httpOptions });
   }
 
-  getProduct(id: String) {
-    return this.http.get(environment.baseUrl + 'product/getProduct/' + id, { headers: this.httpOptions });
+  quitProductCart(id: String) {
+    return this.http.post(environment.baseUrl + 'cart/quitProduct/' + id, '', { headers: this.httpOptions });
   }
 }
