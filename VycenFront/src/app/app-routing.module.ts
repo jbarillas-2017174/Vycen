@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'seeProducts/:id', component: SeeProductsComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', canActivate: [ClientGuard, AdminGuard], component: ProfileComponent },
+  { path: 'profile', canActivate: [ClientGuard], component: ProfileComponent },
   { path: 'company', canActivate: [AdminGuard], component: CompanyComponent },
   { path: 'users', canActivate: [AdminGuard], component: UsersComponent },
   { path: 'forum', component: ForumComponent },
