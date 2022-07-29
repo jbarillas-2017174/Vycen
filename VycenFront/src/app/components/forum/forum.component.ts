@@ -13,22 +13,26 @@ import Swal from 'sweetalert2';
 export class ForumComponent implements OnInit {
   saveM: ForumModel;
   messages: any;
+  identity: any
+  
 
 
   constructor(
     private forumRest: ForumRestService,
     private userRest: UserService
+  
   ) {
     this.saveM = new ForumModel('', '', new Date());
   }
 
   ngOnInit(): void {
     this.getMessages();
+    this.identity = this.userRest.getIdentity()._id;
   }
 
-  createMessages(addMessage: any) {
+  createMessages(addMessageForm:any) {
     this.forumRest.createMessage(this.saveM).subscribe({
-      next: (res: any) => {
+      next: (res:any) => {
         Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -71,6 +75,7 @@ export class ForumComponent implements OnInit {
       })
     })
   }
+
   deleteMessages(id:string){
     this.forumRest.deleteMessage(id).subscribe({
       next: (res:any)=>{

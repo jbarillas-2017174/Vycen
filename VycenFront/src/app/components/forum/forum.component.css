@@ -56,12 +56,12 @@
 }
 */
 
-*{
-    padding: 0.1;
+.body{
+    padding: 0.1px;
 }
 .margin {
     margin: 0% auto;
-    margin-top: 5%;
+    margin-top: 3%;
     width: 50%;
 }
 
@@ -69,6 +69,7 @@
     overflow:scroll; 
     margin-left: 25%;
     margin-right: 25%;
+    margin-top: 3rem;
 }
 
 
@@ -77,5 +78,8 @@
    border: 5px solid transparent;
    position: relative;
    margin: 0 auto;
-   
+
 }
+
+
+

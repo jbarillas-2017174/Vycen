@@ -21,11 +21,13 @@
     
 </div>
 -->
-<div>
-    
+
+
+
 <div class="contend">
     <div class="conteiner" *ngFor="let messa of messages">
-        <div class="card text-white bg-info mb-3" style="max-width: 40rem; border-radius: 0.4rem; background-color:  rgba(49, 58, 66, 0.7); border-color: transparent;">
+        <div class="card text-white bg-info mb-2"
+            style="max-width: 40rem; border-radius: 0.4rem; background-color:  rgba(49, 58, 66, 0.7); border-color: transparent;">
             <div class="card-header">Header</div>
             <div class="card-body">
                 <p class="card-text">{{messa.message}}</p>
@@ -33,12 +35,17 @@
         </div>
     </div>
 </div>
-<div class="input-group margin">
-    <input type="text" class="form-control" placeholder="Message" aria-label="Recipient's username"
-        aria-describedby="basic-addon2">
-    <button class="input-group-text" id="basic-addon2">Send</button>
-</div>
-</div>
+<form (ngSubmit)="createMessages(addMessageForm)" #addMessageForm="ngForm" class="form">
+    <div class="text">
+        <div class="input-group margin">
+
+            <input [(ngModel)]="saveM.message" name="message" type="text" class="form-control" placeholder="Message"
+                aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <button type="submit" class="input-group-text" id="basic-addon2">Send</button>
+        </div>
+    </div>
+</form>
+
 
 
 
