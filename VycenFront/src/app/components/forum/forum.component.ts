@@ -14,13 +14,13 @@ export class ForumComponent implements OnInit {
   saveM: ForumModel;
   messages: any;
   identity: any
-  
+
 
 
   constructor(
     private forumRest: ForumRestService,
     private userRest: UserService
-  
+
   ) {
     this.saveM = new ForumModel('', '', new Date());
   }
@@ -30,27 +30,11 @@ export class ForumComponent implements OnInit {
     this.identity = this.userRest.getIdentity()._id;
   }
 
-  createMessages(addMessageForm:any) {
+  createMessages(addMessageForm: any) {
     this.forumRest.createMessage(this.saveM).subscribe({
-      next: (res:any) => {
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, send it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire(
-              'Add it!',
-              'Your message has been sent.',
-              'success'
-            )
-          }
-        })
+      next: (res: any) => {
         this.getMessages();
+        addMessageForm.reset();
       },
       error: (err) => Swal.fire({
         icon: 'error',
@@ -65,7 +49,10 @@ export class ForumComponent implements OnInit {
 
   getMessages() {
     this.forumRest.getMessages().subscribe({
-      next: (res: any) => this.messages = res.forum,
+      next: (res: any) => {
+        this.messages = res.forum
+        console.log(this.messages)
+      },
       error: (err) => Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -76,25 +63,49 @@ export class ForumComponent implements OnInit {
     })
   }
 
-  deleteMessages(id:string){
-    this.forumRest.deleteMessage(id).subscribe({
-      next: (res:any)=>{
+
+  deleteMessages(id: string) {
+    Swal.fire({
+      title: 'Delete message to everyone?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete it',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.forumRest.deleteMessage(id).subscribe({
+          next: (res: any) => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: res.message,
+              showConfirmButton: false,
+              timer: 1000
+            })
+            this.getMessages();
+          },
+          error: (err) => Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.error.message,
+            showConfirmButton: false,
+            timer: 1000
+          }),
+        });
+
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
         Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: res.message,
+          title: 'Canceled',
+          icon: 'error',
           showConfirmButton: false,
-          timer: 1000
+          timer: 2000
         })
-        this.getMessages();
-      },
-      error: (err) => Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: err.error.message,
-        showConfirmButton: false,
-        timer: 1000
-      }),
-    });
+      }
+    })
   }
 }

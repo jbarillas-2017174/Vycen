@@ -32,7 +32,7 @@ exports.sendMessage = async (req, res) => {
 
 exports.getMessages = async (req, res) => {
     try {
-        const forum = await Forum.find();
+        const forum = await Forum.find().populate('user');
         if (!forum) return res.status(404).send({ message: 'Messages not found.' });
         return res.send({ message: 'Messages found:', forum });
     } catch (err) {
