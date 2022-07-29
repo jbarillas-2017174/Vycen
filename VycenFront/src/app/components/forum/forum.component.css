@@ -1,4 +1,4 @@
-/* From uiverse.io by @alexruix */
+/* From uiverse.io by @alexruix 
 .card {
     --background: #fff;
     width: 190px;
@@ -45,6 +45,7 @@
 }
 
 /*Hover*/
+/*
 .card:hover::after {
     opacity: 0;
 }
@@ -52,4 +53,29 @@
 .card:hover .card-info {
     color: #2c2c2c;
     transition: color 2s;
+}
+*/
+
+*{
+    padding: 0.1;
+}
+.margin {
+    margin: 0% auto;
+    margin-top: 5%;
+    width: 50%;
+}
+
+.card{
+    overflow:scroll; 
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+
+
+.contend{
+   border: 5px solid transparent;
+   position: relative;
+   margin: 0 auto;
+   
 }

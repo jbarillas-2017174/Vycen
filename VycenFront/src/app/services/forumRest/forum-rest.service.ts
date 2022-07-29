@@ -18,6 +18,18 @@ export class ForumRestService {
   ) { }
 
   getImages() {
-    return this.http.get(environment.baseUrl + 'forum/getImages', { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
+    return this.http.get(environment.baseUrl + 'forum/getImages', { headers: this.httpOptions.set('Authorization', this.userRest.getToken())});
+  }
+
+  createMessage(params: {}){
+    return this.http.post(environment.baseUrl + 'forum/sendMessage',params,{headers: this.httpOptions.set('Authotization', this.userRest.getToken())});
+  }
+
+  getMessages(){
+    return this.http.get(environment.baseUrl + 'forum/getMessages', {headers: this.httpOptions.set('Authorization', this.userRest.getToken())});
+  }
+
+  deleteMessage(id: String){
+    return this.http.delete(environment.baseUrl + 'forum/deleteMessage' + id, {headers: this.httpOptions.set('Authorization', this.userRest.getToken())});
   }
 }
