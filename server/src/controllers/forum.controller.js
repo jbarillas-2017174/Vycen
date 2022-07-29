@@ -5,7 +5,7 @@ const Forum = require('../models/forum')
 const { validExtension } = require('../utils/validate');
 const path = require('path');
 
-
+/*
 exports.addImage = async (req, res) => {
     try {
         const params = req.body;
@@ -62,7 +62,7 @@ exports.getImages = async (req, res) => {
         const files = await fs.promises.readdir(directoryPath);
         res.status(200).send({message: files, user: user});
 
-        /*const fileName = req.params.fileName;
+        const fileName = req.params.fileName;
         const img = await Forum.find();
         let pathFile = []
         for (let i of img) {
@@ -75,9 +75,9 @@ exports.getImages = async (req, res) => {
 
         const image = fs.existsSync(pathFile);
         if (!image) return res.status(404).send({ message: 'Images not found' });
-        return res.sendFile(path.resolve(pathFile));*/
+        return res.sendFile(path.resolve(pathFile));
     } catch (err) {
         console.log(err);
         return res.status(500).send(err);
     }
-}
+}*/
