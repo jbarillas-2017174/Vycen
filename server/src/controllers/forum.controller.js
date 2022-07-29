@@ -1,9 +1,72 @@
 'use strict'
 
-const fs = require('fs');
+
 const Forum = require('../models/forum')
-const { validExtension } = require('../utils/validate');
-const path = require('path');
+const moment = require('moment')
+const { validExtension, validateData } = require('../utils/validate');
+const date = new Date();
+
+exports.sendMessage = async (req, res) => {
+    try {
+        const userId = req.user.sub;
+        const params = req.body;
+        const data = {
+            user: userId,
+            message: params.message,
+            date: date,
+        }
+        const msg = validateData(data)
+        if (msg) return res.status(400).send(msg);
+        const spam = await Forum.find({ message: params.message, date: date });
+        if (spam.length >= 5) {
+            return res.status(401).send({ message: 'Warning, please wait to send this message' })
+        };
+        const message = new Forum(data);
+        await message.save();
+        return res.send({ message: 'Message sended' });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err);
+    }
+}
+
+exports.getMessages = async (req, res) => {
+    try {
+        const forum = await Forum.find();
+        if (!forum) return res.status(404).send({ message: 'Messages not found.' });
+        return res.send({ message: 'Messages found:', forum });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err);
+    }
+}
+
+exports.getMessage = async (req, res) => {
+    try {
+        const forumId = req.params.id;
+        const forum = await Forum.findOne({ _id: forumId })
+        if (!forum) return res.status(404).send({ message: 'Message not found.' });
+        return res.send({ message: 'Message found:', forum });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err);
+    }
+}
+
+exports.deleteMessage = async (req, res) => {
+    try {
+        const forumId = req.params.id;
+        const forum = await Forum.findOne({ _id: forumId });
+        if (forum.user != req.user.sub) return res.send({ message: 'You can\'t delete this message' });
+        const deleteF = await Forum.findByIdAndDelete({ _id: forumId });
+        if (!deleteF) return res.status(500).send({ message: 'Can not delete this message' });
+        return res.send({ message: 'Message deleted' })
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send(err);
+    }
+}
+
 
 /*
 exports.addImage = async (req, res) => {

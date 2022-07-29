@@ -3,9 +3,9 @@
 const mongoose = require('mongoose');
 
 const forumModel = mongoose.Schema({
-    image: String,
     user: { type: mongoose.Schema.ObjectId, ref: 'Company' },
-    description: String,
+    message: String,
+    date: Date,
 });
 
 module.exports = mongoose.model('Forum', forumModel)
