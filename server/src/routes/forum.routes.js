@@ -8,7 +8,7 @@ const api = express.Router();
 const mdAuth = require('../services/authenticated');
 
 api.post('/sendMessage', mdAuth.ensureAuth, forumController.sendMessage);
-api.get('/getMessages', mdAuth.ensureAuth, forumController.getMessages);
+api.get('/getMessages', forumController.getMessages);
 api.get('/getMessage/:id', mdAuth.ensureAuth, forumController.getMessage);
 api.delete('/deleteMessage/:id', mdAuth.ensureAuth, forumController.deleteMessage);
 /*

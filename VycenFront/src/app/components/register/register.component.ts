@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
     private userRest: UserService,
     private router: Router
   ) {
-    this.user = new UserModel('', '', '', '', '', '', '', '', '');
+    this.user = new UserModel('', '', '', '', '', '', '', '', '', '');
     this.countries = countryModel
   }
 

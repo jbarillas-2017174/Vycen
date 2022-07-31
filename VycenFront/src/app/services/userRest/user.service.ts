@@ -29,6 +29,10 @@ export class UserService {
     return this.http.get(environment.baseUrl + 'user/getUsers', { headers: this.httpOptions.set('Authorization', this.getToken()) })
   }
 
+  getProfiles(id:String){
+    return this.http.get(environment.baseUrl + 'user/profile/'+id, { headers: this.httpOptions.set('Authorization', this.getToken()) })
+  }
+
   createUser(params: {}) {
     return this.http.post(environment.baseUrl + 'user/createUser', params, { headers: this.httpOptions.set('Authorization', this.getToken()) })
   }

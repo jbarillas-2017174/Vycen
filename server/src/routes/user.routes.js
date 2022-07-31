@@ -8,6 +8,7 @@ const mdAuth = require('../services/authenticated');
 api.get('/test', userController.test);
 api.post('/register', userController.register);
 api.post('/login', userController.login);
+api.get('/profile/:id', userController.viewProfiles);
 
 api.put('/updateAccount', mdAuth.ensureAuth, userController.updateAccount);
 api.delete('/deleteAccount', mdAuth.ensureAuth, userController.deleteAccount);

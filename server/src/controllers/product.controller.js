@@ -29,7 +29,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
     try {
-        const products = await Product.find().populate('company');
+        const products = await Product.find().populate('company').sort({date: 1});
         if (!products) return res.status(404).send({ message: 'There are no any products' });
         return res.send({ message: 'Products found:', products })
     } catch (err) {
@@ -54,6 +54,7 @@ exports.updateProduct = async (req, res) => {
     try {
         const productId = req.params.id;
         const params = req.body;
+        if(params.price < 0) return res.status(400).send({message: 'Invalid price'});
         const product = await Product.findOne({ _id: productId });
         if (!product) return res.status(404).send({ message: 'Product not found' });
         const update = await Product.findByIdAndUpdate({ _id: productId }, params, { new: true });

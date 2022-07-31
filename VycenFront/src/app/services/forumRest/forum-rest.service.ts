@@ -30,6 +30,6 @@ export class ForumRestService {
   }
 
   deleteMessage(id: String) {
-    return this.http.delete(environment.baseUrl + 'forum/deleteMessage' + id, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
+    return this.http.delete(environment.baseUrl + 'forum/deleteMessage/' + id, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
   }
 }
