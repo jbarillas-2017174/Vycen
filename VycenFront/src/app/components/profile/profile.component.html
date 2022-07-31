@@ -7,8 +7,8 @@
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head d-flex">
                     <div class="profile mr-3">
-                        <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
-                            alt="Profile Image" width="130" class="m-3 profile-img">
+                        <img src="../../../assets/img/user.jpg"
+                            alt="Profile Image" width="120" class="m-3 profile-img img-fluid">
                     </div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0">{{account.name}} {{account.lastName}}</h4>
@@ -38,15 +38,21 @@
             <div class="px-4 py-3 mt-2 mb-2">
                 <h5 class="mb-0 mt-2">Info</h5>
                 <div class="p-4 rounded mt-0">
-                    <p class="font-italic mb-0">Email: {{account.email}}</p>
-                    <p class="font-italic mb-0">Country: {{account.country}}</p>
+                    <div class="d-flex">
+                        <p class="font-italic mb-0">Email: {{account.email}}</p>
+                        <span *ngIf="!account.email" style="font-size: 14px;">You have'nt an email.</span>
+                    </div>
+                    <div class="d-flex">
+                        <p class="font-italic mb-0">Country: {{account.country}}</p>
+                        <span *ngIf="!account.country" style="font-size: 14px;">You have'nt a country.</span>
+                    </div>
                 </div>
             </div>
             <div class="px-4 py-3 mt-2 mb-2">
                 <h5 class="mb-0 mt-2">About you</h5>
                 <div class="p-4 rounded shadow-sm bg-primary mt-4">
-                    <p class="font-italic mb-2">Tell us about you</p>
-
+                    <p *ngIf="account.about" class="font-italic mb-2">{{account.about}}</p>
+                    <span *ngIf="!account.about">Tell us about you...</span>
                 </div>
             </div>
             <div class="footer m-3 mb-4">
@@ -85,6 +91,8 @@
                     type="text" class="input m-2 ms-3" required="">
                     <option *ngFor="let c of countries" value="{{c.name}}" class="text-dark">{{c.name}}</option>
                 </select>
+                <textarea [(ngModel)]="account.about" style="width: 85%;" name="phone" placeholder="About you" type="text" class="input m-2"
+                    required=""></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

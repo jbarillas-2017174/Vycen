@@ -13,6 +13,7 @@ import { SeeProductsComponent } from './components/see-products/see-products.com
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ClientGuard } from './guards/client.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { ProfileUserComponent } from './components/profile-user/profile-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'seeProducts/:id', component: SeeProductsComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', canActivate: [ClientGuard], component: ProfileComponent },
+  { path: 'profileUser/:id', component: ProfileUserComponent },
   { path: 'company', canActivate: [AdminGuard], component: CompanyComponent },
   { path: 'users', canActivate: [AdminGuard], component: UsersComponent },
   { path: 'forum', component: ForumComponent },

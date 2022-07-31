@@ -38,3 +38,7 @@
     margin-right: 25%;
     position: relative;
 }
+
+.profile:hover{
+    color: #0c4881;
+}

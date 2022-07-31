@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     private userRest: UserService,
     private router: Router
   ) {
-    this.user = new UserModel('', '', '', '', '', '', '', '', '');
+    this.user = new UserModel('', '', '', '', '', '', '', '', '', '');
     this.countries = countryModel
   }
 
@@ -59,13 +59,17 @@ export class ProfileComponent implements OnInit {
           showConfirmButton: false,
           timer: 1000
         })
+        this.getAccount();
       },
-      error: (err) => Swal.fire({
-        title: err.error.message || err.error,
+      error: (err) => {
+        Swal.fire({
+          title: err.error.message || err.error,
           icon: 'error',
           showConfirmButton: false,
           timer: 2000
-      })
+        })
+        this.getAccount();
+      }
     })
   }
 
@@ -100,17 +104,6 @@ export class ProfileComponent implements OnInit {
         })
 
 
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        Swal.fire({
-          title: 'Canceled',
-          text: 'Your account is safe',
-          icon: 'error',
-          showConfirmButton: false,
-          timer: 2000
-        })
       }
     })
   }

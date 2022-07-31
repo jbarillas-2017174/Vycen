@@ -51,7 +51,6 @@ export class ForumComponent implements OnInit {
     this.forumRest.getMessages().subscribe({
       next: (res: any) => {
         this.messages = res.forum
-        console.log(this.messages)
       },
       error: (err) => Swal.fire({
         icon: 'error',
@@ -69,7 +68,7 @@ export class ForumComponent implements OnInit {
       title: 'Delete message to everyone?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Delete it',
+      confirmButtonText: 'Yes, delete it',
       cancelButtonText: 'Cancel',
       reverseButtons: true
     }).then((result) => {
@@ -88,24 +87,14 @@ export class ForumComponent implements OnInit {
           error: (err) => Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: err.error.message,
+            text: err.error.message || err.error,
             showConfirmButton: false,
             timer: 1000
           }),
         });
 
 
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        Swal.fire({
-          title: 'Canceled',
-          icon: 'error',
-          showConfirmButton: false,
-          timer: 2000
-        })
-      }
+      } 
     })
   }
 }

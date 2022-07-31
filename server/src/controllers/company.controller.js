@@ -29,7 +29,7 @@ exports.createCompany = async (req, res) => {
 
 exports.getCompanies = async (req, res) => {
     try {
-        const companies = await Company.find({});
+        const companies = await Company.find({}).sort({name: -1});
         if (!companies) return res.status(404).send({ message: 'There are no any companies here' });
         return res.send({ message: 'Companies found:', companies })
     } catch (err) {

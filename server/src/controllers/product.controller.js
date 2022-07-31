@@ -54,6 +54,7 @@ exports.updateProduct = async (req, res) => {
     try {
         const productId = req.params.id;
         const params = req.body;
+        if(params.price < 0) return res.status(400).send({message: 'Invalid price'});
         const product = await Product.findOne({ _id: productId });
         if (!product) return res.status(404).send({ message: 'Product not found' });
         const update = await Product.findByIdAndUpdate({ _id: productId }, params, { new: true });

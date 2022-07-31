@@ -4,6 +4,11 @@
     position: relative;
 }
 
+.btnCarousel {
+    background-color: rgba(0, 0, 0, 0.616);
+    border-radius: 95%;
+}
+
 /*
 .container {
     position: absolute;

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-1"
     style="background-color: rgb(61, 71, 78) !important;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><button data-text="Awesome" class="button ">
+        <a class="navbar-brand" routerLink=""><button data-text="Awesome" class="button ">
                 <span class="actual-text">&nbsp;Vycen&nbsp;</span>
                 <span class="hover-text" aria-hidden="true">&nbsp;Vycen&nbsp;</span>
             </button></a>
@@ -19,7 +19,7 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/product">Products</a>
                 </li>
-                <li class="nav-item" *ngIf="identity">
+                <li class="nav-item" *ngIf="identity == 'CLIENT'">
                     <a class="nav-link" routerLink="/shoppingCart"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                             fill="currentColor" class="bi bi-cart-fill cart" viewBox="0 0 16 16">
                             <path
@@ -31,7 +31,7 @@
                     <a class="nav-link" routerLink="/login" *ngIf="!identity">Login</a>
                 </li>
                 <li class="nav-item dropdown" *ngIf="identity">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button"
                         aria-haspopup="true" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="20"
                             height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />

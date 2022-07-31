@@ -8,6 +8,7 @@ export class UserModel {
         public phone: String,
         public email: String,
         public password: String,
-        public role: String
+        public role: String,
+        public about: String
     ) { }
 }

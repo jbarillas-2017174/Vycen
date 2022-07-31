@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit {
         name: 'Admin'
       },
     ]
-    this.user = new UserModel('', '', '', '', '', '', '', '', '');
+    this.user = new UserModel('', '', '', '', '', '', '', '', '', '');
   }
 
   ngOnInit(): void {
