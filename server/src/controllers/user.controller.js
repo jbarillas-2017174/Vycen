@@ -2,6 +2,8 @@
 
 const { validateData, encrypt, searchUser, checkPass } = require('../utils/validate');
 const User = require('../models/user');
+const Forum = require('../models/forum');
+const Cart = require('../models/shoppingCart');
 const jwt = require('../services/jwt');
 
 exports.test = async (req, res) => {
@@ -87,8 +89,16 @@ exports.deleteAccount = async (req, res) => {
         if (already.username == 'admin') return res.status(401).send({ message: 'Can\'t delete this account' })
         if (!already) return res.status(404).send({ message: 'Account does not exist' });
         if (accountId != req.user.sub) return res.status(403).send({ message: 'Unauthorized to delete this account' });
+        const forum = await Forum.find({ user: accountId });
+        const cart = await Cart.find({ user: accountId });
+        for (let f of forum) {
+            await Forum.findOneAndDelete({ _id: f._id });
+        }
+        for (let c of cart) {
+            await Cart.findOneAndDelete({ _id: c._id });
+        }
         const user = await User.findOneAndDelete({ _id: accountId });
-        if(!user) return res.status(500).send({message: 'Error deleting account'});
+        if (!user) return res.status(500).send({ message: 'Error deleting account' });
         return res.send({ message: 'Account deleted' });
     } catch (err) {
         console.log(err);
@@ -112,7 +122,7 @@ exports.getAccount = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
     try {
-        const users = await User.find().select('-password').sort({name: -1});
+        const users = await User.find().select('-password').sort({ name: -1 });
         if (!users) return res.status(404).send({ message: 'Users not found' });
         delete users.password;
         return res.send({ message: 'Users found: ', users });
@@ -170,7 +180,7 @@ exports.updateUser = async (req, res) => {
         const params = req.body;
         if (params.password) return res.status(403).send({ message: 'Cannot update password' });
         const already = await User.findOne({ _id: userId });
-        if(already.role == 'ADMIN') return res.status(401).send({ message: 'Can\'t update an Admin' });
+        if (already.role == 'ADMIN') return res.status(401).send({ message: 'Can\'t update an Admin' });
         if (already.username == 'admin') return res.status(401).send({ message: 'Can\'t update this account' });
         if (already.username == params.username) {
             if (!already) return res.status(404).send({ message: 'Account does not exist' });
@@ -188,10 +198,18 @@ exports.deleteUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const already = await User.findOne({ _id: userId })
-        if(already.role == 'ADMIN') return res.status(401).send({ message: 'Can\'t delete an Admin' });
+        if (already.role == 'ADMIN') return res.status(401).send({ message: 'Can\'t delete an Admin' });
         if (already.username == 'admin') return res.status(401).send({ message: 'Can\'t delete this account' })
         if (!already) return res.status(404).send({ message: 'User not found' });
         if (already.role == 'CLIENT') {
+            const forum = await Forum.find({ user: userId });
+            const cart = await Cart.find({ user: userId });
+            for (let f of forum) {
+                await Forum.findOneAndDelete({ _id: f._id });
+            }
+            for (let c of cart) {
+                await Cart.findOneAndDelete({ _id: c._id });
+            }
             const deleteUser = await User.findOneAndDelete({ _id: userId });
             if (!deleteUser) return res.status(500).send({ message: 'Cannot delete user' });
             return res.send({ message: 'User deleted' });
