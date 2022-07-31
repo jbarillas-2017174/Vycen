@@ -29,7 +29,7 @@ exports.createCompany = async (req, res) => {
 
 exports.getCompanies = async (req, res) => {
     try {
-        const companies = await Company.find({}).sort({name: -1});
+        const companies = await Company.find({}).sort({ name: 1 });
         if (!companies) return res.status(404).send({ message: 'There are no any companies here' });
         return res.send({ message: 'Companies found:', companies })
     } catch (err) {
@@ -56,11 +56,13 @@ exports.updateCompany = async (req, res) => {
         const params = req.body;
         const company = await Company.findOne({ _id: companyId });
         if (!company) return res.status(404).send({ message: 'Company not found' });
-        const exist = await Company.findOne({ name: params.name });
-        if (exist) return res.status(404).send({ message: 'Name in use' });
-        const update = await Company.findByIdAndUpdate({ _id: companyId }, params, { new: true });
-        if (!update) return res.status(500).send({ message: 'Cannot update this company' });
-        return res.send({ message: 'Company updated' });
+        if (company.name == params.name) {
+            const update = await Company.findByIdAndUpdate({ _id: companyId }, params, { new: true });
+            if (!update) return res.status(500).send({ message: 'Cannot update this company' });
+            return res.send({ message: 'Company updated' });
+        }else return res.status(404).send({ message: 'Company already exist' });
+
+
     } catch (err) {
         console.log(err);
         return res.status(500).send(err);

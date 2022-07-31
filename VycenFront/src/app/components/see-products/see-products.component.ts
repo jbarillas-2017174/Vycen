@@ -28,13 +28,13 @@ export class SeeProductsComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((id: any) => {
       this.idProduct = id.get('id');
     })
-    this.getProduct(this.idProduct)
+    this.getProduct()
     this.identity = this.userRest.getIdentity().role;
   }
 
 
-  getProduct(id: String) {
-    this.productRest.getProduct(id).subscribe({
+  getProduct() {
+    this.productRest.getProduct(this.idProduct).subscribe({
       next: (res: any) => {
         this.productInfo = res.product
       },
@@ -100,6 +100,7 @@ export class SeeProductsComponent implements OnInit {
           showConfirmButton: false,
           timer: 2000
         });
+        this.getProduct();
       },
       error: (err) => {
         Swal.fire({
@@ -108,6 +109,7 @@ export class SeeProductsComponent implements OnInit {
           showConfirmButton: false,
           timer: 2000
         })
+        this.getProduct();
       }
     })
   }

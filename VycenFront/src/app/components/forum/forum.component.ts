@@ -41,7 +41,7 @@ export class ForumComponent implements OnInit {
         title: 'Oops...',
         text: err.error.message,
         showConfirmButton: false,
-        timer: 1000
+        timer: 2000
       })
     }
     )

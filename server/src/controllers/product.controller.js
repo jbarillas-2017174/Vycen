@@ -29,7 +29,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
     try {
-        const products = await Product.find().populate('company');
+        const products = await Product.find().populate('company').sort({date: 1});
         if (!products) return res.status(404).send({ message: 'There are no any products' });
         return res.send({ message: 'Products found:', products })
     } catch (err) {
