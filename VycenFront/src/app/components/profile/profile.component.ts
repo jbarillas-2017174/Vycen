@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
 
   user: UserModel
   countries: any
+  isLoading: boolean = true
 
   swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -36,9 +37,21 @@ export class ProfileComponent implements OnInit {
     this.getAccount()
   }
 
+  setLoading(loading: boolean) {
+    if (loading == true) {
+      this.isLoading = true
+    } else {
+      this.isLoading = false
+    }
+  }
+
   getAccount() {
+    this.setLoading(true)
     this.userRest.getUser(this.userRest.getIdentity()._id).subscribe({
-      next: (res: any) => this.account = res.users,
+      next: (res: any) => {
+        this.setLoading(false)
+        this.account = res.users
+      },
       error: (err) => {
         Swal.fire({
           icon: 'error',

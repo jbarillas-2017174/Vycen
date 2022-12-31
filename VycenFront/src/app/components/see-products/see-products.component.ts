@@ -15,6 +15,7 @@ export class SeeProductsComponent implements OnInit {
   idProduct: any
   productInfo: any
   identity: any
+  isLoading:boolean = true
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -32,10 +33,20 @@ export class SeeProductsComponent implements OnInit {
     this.identity = this.userRest.getIdentity().role;
   }
 
+  setLoading(loading: boolean) {
+    if (loading == true) {
+      this.isLoading = true
+    } else {
+      this.isLoading = false
+    }
+  }
+
 
   getProduct() {
+    this.setLoading(true)
     this.productRest.getProduct(this.idProduct).subscribe({
       next: (res: any) => {
+        this.setLoading(false)
         this.productInfo = res.product
       },
       error: (err) => {

@@ -14,6 +14,7 @@ export class ForumComponent implements OnInit {
   saveM: ForumModel;
   messages: any;
   identity: any
+  isLoading: boolean = true
 
 
 
@@ -28,6 +29,14 @@ export class ForumComponent implements OnInit {
   ngOnInit(): void {
     this.getMessages();
     this.identity = this.userRest.getIdentity()._id;
+  }
+
+  setLoading(loading: boolean) {
+    if (loading == true) {
+      this.isLoading = true
+    } else {
+      this.isLoading = false
+    }
   }
 
   createMessages(addMessageForm: any) {
@@ -48,8 +57,10 @@ export class ForumComponent implements OnInit {
   }
 
   getMessages() {
+    this.setLoading(true)
     this.forumRest.getMessages().subscribe({
       next: (res: any) => {
+        this.setLoading(false)
         this.messages = res.forum
       },
       error: (err) => Swal.fire({

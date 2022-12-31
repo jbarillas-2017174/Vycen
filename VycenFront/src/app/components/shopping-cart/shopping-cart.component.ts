@@ -10,10 +10,11 @@ import Swal from 'sweetalert2';
 export class ShoppingCartComponent implements OnInit {
   cartProducts: any
   total: number
+  isLoading: boolean = true
 
   constructor(
     private cartRest: CartRestService
-  ) { 
+  ) {
     this.total = 0
   }
 
@@ -21,9 +22,19 @@ export class ShoppingCartComponent implements OnInit {
     this.getCart()
   }
 
+  setLoading(loading: boolean) {
+    if (loading == true) {
+      this.isLoading = true
+    } else {
+      this.isLoading = false
+    }
+  }
+
   getCart() {
+    this.setLoading(true)
     this.cartRest.getCart().subscribe({
       next: (res: any) => {
+        this.setLoading(false)
         this.cartProducts = res.cart
         for (let t of this.cartProducts) {
           this.total += parseInt(t.subtotal)

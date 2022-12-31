@@ -15,6 +15,7 @@ export class UsersComponent implements OnInit {
   role: any
   user: UserModel
   newUser: any
+  isLoading: boolean = true
 
   constructor(
     private userRest: UserService
@@ -37,11 +38,18 @@ export class UsersComponent implements OnInit {
     this.getUsers()
   }
 
+  setLoading(loading: boolean) {
+    if (loading == true) {
+      this.isLoading = true
+    } else {
+      this.isLoading = false
+    }
+  }
+
   getUser(id: String) {
     this.userRest.getUser(id).subscribe({
       next: (res: any) => {
         this.newUser = res.users
-        console.log(this.newUser)
       },
       error: (err) => {
         Swal.fire({
@@ -55,8 +63,12 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
+    this.setLoading(true)
     this.userRest.getUsers().subscribe({
-      next: (res: any) => this.users = res.users,
+      next: (res: any) => {
+        this.setLoading(false)
+        this.users = res.users
+      },
       error: (err) => {
         Swal.fire({
           title: err.error.message || err.error,

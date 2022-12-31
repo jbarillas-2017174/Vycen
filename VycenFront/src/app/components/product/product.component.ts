@@ -17,6 +17,7 @@ export class ProductComponent implements OnInit {
   searchCompany: any
   product: ProductModel
   identity: any
+  isLoading: boolean = true
 
   constructor(
     private productRest: ProductService,
@@ -37,6 +38,14 @@ export class ProductComponent implements OnInit {
     this.searchCompany = id
   }
 
+  setLoading(loading: boolean) {
+    if (loading == true) {
+      this.isLoading = true
+    } else {
+      this.isLoading = false
+    }
+  }
+
 
   getCompany() {
     this.companyRest.getCompanies().subscribe({
@@ -53,8 +62,11 @@ export class ProductComponent implements OnInit {
   }
 
   getProducts() {
+    this.setLoading(true);
+
     this.productRest.getProducts().subscribe({
       next: (res: any) => {
+        this.setLoading(false)
         this.products = res.products
       },
       error: (err) => {

@@ -12,6 +12,7 @@ export class CompanyComponent implements OnInit {
   companies: any
   company: CompanyModel
   newCompany: any
+  isLoading:boolean = true
 
   constructor(
     private companyRest: CompanyRestService
@@ -23,9 +24,19 @@ export class CompanyComponent implements OnInit {
     this.getCompanies()
   }
 
+  setLoading(loading: boolean) {
+    if (loading == true) {
+      this.isLoading = true
+    } else {
+      this.isLoading = false
+    }
+  }
+
   getCompanies() {
+    this.setLoading(true)
     this.companyRest.getCompanies().subscribe({
       next: (res: any) => {
+        this.setLoading(false)
         this.companies = res.companies
       },
       error: (err) => {
