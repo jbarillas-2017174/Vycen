@@ -63,21 +63,23 @@ export class ProductComponent implements OnInit {
 
   getProducts() {
     this.setLoading(true);
+    setTimeout(() => {
 
-    this.productRest.getProducts().subscribe({
-      next: (res: any) => {
-        this.setLoading(false)
-        this.products = res.products
-      },
-      error: (err) => {
-        Swal.fire({
-          title: err.error.message || err.error,
-          icon: 'error',
-          showConfirmButton: false,
-          timer: 2000
-        })
-      }
-    })
+      this.productRest.getProducts().subscribe({
+        next: (res: any) => {
+          this.setLoading(false)
+          this.products = res.products
+        },
+        error: (err) => {
+          Swal.fire({
+            title: err.error.message || err.error,
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2000
+          })
+        }
+      })
+    }, 5000)
   }
 
   addProductCart(id: String) {
