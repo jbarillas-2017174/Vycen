@@ -10,12 +10,16 @@ exports.addToCart = async (req, res) => {
         const price = parseInt(product.price)
         let subT = 0
         const exist = await Cart.findOne({ user: req.user.sub, product: product._id })
+        if(product.stock <= 0) return res.status(500).send({ message: 'Insufficient stock' });
         if (exist) {
+            let subTexist = product.stock - exist.times
+            if(subTexist <= 0) return res.status(500).send({ message: 'Insufficient stock' });
             subT = parseInt(exist.subtotal) + price
             const data = {
                 subtotal: subT,
                 times: parseInt(exist.times) + 1
             }
+
             const updateCart = await Cart.findOneAndUpdate({ _id: exist._id }, data, { new: true });
             if (!updateCart) return res.status(500).send({ message: 'Error updating the cart' });
             return res.send({ message: 'Cart updated' })
@@ -76,7 +80,7 @@ exports.getCart = async (req, res) => {
         const userId = req.user.sub;
         const cart = await Cart.find({ user: userId })
             .populate({ path: 'user', select: '-password -phone -role -_id' })
-            .populate({ path: 'product', select: '-date -_id', populate: 'company' });
+            .populate({ path: 'product', select: '-date', populate: 'company' });
         if (!cart) return res.status(404).send({ message: 'Your cart does not exist' });
         let total = 0;
         for (let t of cart) {

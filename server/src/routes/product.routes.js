@@ -15,6 +15,6 @@ api.put('/updateProduct/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], productContro
 api.delete('/deleteProduct/:id', [mdAuth.ensureAuth, mdAuth.isAdmin], productController.deleteProduct);
 
 //client
-api.post('/buyProduct/:id', [mdAuth.ensureAuth, mdAuth.isClient], productController.buyProduct);
+api.put('/buyProduct/:id', [mdAuth.ensureAuth, mdAuth.isClient], productController.buyProduct);
 
 module.exports = api;

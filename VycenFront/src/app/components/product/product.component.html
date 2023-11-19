@@ -64,11 +64,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title">{{p.name}}</h1>
+                    <h1 class="card-title" [routerLink]="['/seeProducts/'+p._id]">{{p.name}}</h1>
                     <h2 class="card-owner"> - {{p.company.name}} -</h2>
                     <p class="card-info"> Size: {{p.size}}</p>
                     <button class="cta">
-                        <span class="hover-underline-animation" routerLink="/register"> Buy Now </span>                   
+                        <span class="hover-underline-animation" (click)="addProductCart(p._id)"> Buy Now </span>                   
                     </button>
                 </div>
             </div>
