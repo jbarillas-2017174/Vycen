@@ -36,5 +36,9 @@ export class ProductService {
     return this.http.delete(environment.baseUrl + 'product/deleteProduct/' + id, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
   }
 
+  buyProduct(id: String, params: {}) {
+    return this.http.put(environment.baseUrl + 'product/buyProduct/' + id, params, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
+  }
+
 }
 
