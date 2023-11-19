@@ -21,6 +21,7 @@ import { SearchPipe } from './pipes/search.pipe';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ProfileUserComponent } from './components/profile-user/profile-user.component';
 import { LoadingAnimationComponent } from './components/loading-animation/loading-animation.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { LoadingAnimationComponent } from './components/loading-animation/loadin
     ShoppingCartComponent,
     ProfileUserComponent,
     LoadingAnimationComponent,
+    ReportsComponent,
   ],
   imports: [
     BrowserModule,

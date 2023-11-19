@@ -7,6 +7,7 @@ const productModel = mongoose.Schema({
     size: String,
     sex: String,
     price: Number,
+    stock: Number,
     date: Date,
     company: { type: mongoose.Schema.ObjectId, ref: 'Company' }
 });

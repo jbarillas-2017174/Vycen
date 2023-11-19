@@ -14,6 +14,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { ClientGuard } from './guards/client.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { ProfileUserComponent } from './components/profile-user/profile-user.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'profileUser/:id', component: ProfileUserComponent },
   { path: 'company', canActivate: [AdminGuard], component: CompanyComponent },
   { path: 'users', canActivate: [AdminGuard], component: UsersComponent },
+  { path: 'reports', canActivate: [AdminGuard], component: ReportsComponent },
   { path: 'forum', component: ForumComponent },
   { path: 'shoppingCart', canActivate: [ClientGuard], component: ShoppingCartComponent },
   { path: '**', component: NotFoundComponent }

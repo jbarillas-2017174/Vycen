@@ -11,6 +11,7 @@ const productRoutes = require('../src/routes/product.routes');
 const cartRoutes = require('../src/routes/shoppingCart.routes');
 const forumRoutes = require('../src/routes/forum.routes');
 const galleryRoutes = require('../src/routes/gallery.routes');
+const reportRoutes = require('../src/routes/reports.routes');
 
 
 const app = express();
@@ -26,6 +27,7 @@ app.use('/product', productRoutes);
 app.use('/cart', cartRoutes);
 app.use('/forum', forumRoutes);
 app.use('/gallery', galleryRoutes);
+app.use('/reports', reportRoutes);
 
 
 
