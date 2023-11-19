@@ -12,17 +12,18 @@
 
 .cards-container{
     display: flex;
-    gap: 30px;
+    gap: 35px 50px;
     flex-wrap: wrap;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 35px;
     justify-content: center;
+  
 }
 
 
 .card{
-    width: 205px;
-    height: 350px;
+    width: 300px;
+    height: 450px;
     border-radius: 20px;
     overflow: hidden;
    /* border: 8px solid #fff;*/
@@ -46,12 +47,13 @@
     backdrop-filter: blur(5px);
     border-radius: 15px;
     color: #fff;
-    padding: 30px;
+    padding: 50px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
     transition: all .5s ease;
+    gap: 25px;
 
 }
 .card-texts{
@@ -65,7 +67,7 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     transition: 2s;
 
 }
@@ -78,31 +80,57 @@
     text-transform:  uppercase;
     font-size: 30px;
     font-weight: 500;
+    margin-top: 40px;
 }
 
 .card-owner{
     text-transform: capitalize;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 300;
 
 }
 
 .card-info{
-    font-size: 16px;
+    font-size: 20px;
     line-height: 25px;
-    margin: 40px 0;
     font-weight: 400;
 }
 
-.card-btn{
-    color: #1f3d47;
-    background: #8fabba;
-    width: 120px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-transform: capitalize;
+.cta {
     border: none;
-    outline: none;
+    background: none;
+    font-size: 19px;
 }
 
 
+.hover-underline-animation {
+    position: relative;
+    color: #ffffff;
+    padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1.5px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+
+svg{
+
+    width: 40px;
+    
+
+}
