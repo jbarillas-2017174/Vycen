@@ -22,6 +22,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { ProfileUserComponent } from './components/profile-user/profile-user.component';
 import { LoadingAnimationComponent } from './components/loading-animation/loading-animation.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { ReportsComponent } from './components/reports/reports.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
