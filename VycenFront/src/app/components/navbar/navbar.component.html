@@ -13,7 +13,11 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link " routerLink="/forum">Forum
+                    <a class="nav-link " routerLink="/forum">Chat
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " routerLink="/forum">Gallery
                     </a>
                 </li>
                 <li class="nav-item">
@@ -37,9 +41,10 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg></a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" routerLink="/profile">View Profile</a>
+                        <a class="dropdown-item" routerLink="/profile">Profile</a>
                         <a class="dropdown-item" routerLink="/users" *ngIf="role == 'ADMIN'">Users</a>
                         <a class="dropdown-item" routerLink="/company" *ngIf="role == 'ADMIN'">Companies</a>
+                        <a class="dropdown-item" routerLink="/reports" *ngIf="role == 'ADMIN'">Reports</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" (click)="logOut()">Log out</a>
                     </div>

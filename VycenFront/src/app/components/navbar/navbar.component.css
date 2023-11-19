@@ -48,12 +48,3 @@
   filter: drop-shadow(0 0 23px var(--animation-color))
 }
 
-.cart:hover {
-  transform: translateX(5px) rotate(-15deg);
-}
-
-@media (max-width: 1000px) {
-  .cart:hover {
-    transform: translateX(15px) rotate(-15deg);
-  }
-}
