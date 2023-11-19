@@ -79,7 +79,7 @@ export class ProductComponent implements OnInit {
           })
         }
       })
-    }, 5000)
+    }, 700)
   }
 
   addProductCart(id: String) {
