@@ -9,12 +9,17 @@
         </div>
         <div class="card text-center p-4">
             <canvas baseChart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                [chartType]="'doughnut'">
+                [chartType]="'line'">
             </canvas>
         </div>
         <div class="card text-center p-4">
             <canvas baseChart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                [chartType]="'doughnut'">
+                [chartType]="'radar'">
+            </canvas>
+        </div>
+        <div class="card text-center p-4">
+            <canvas baseChart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels" [options]="barChartOptions"
+                [chartType]="'pie'">
             </canvas>
         </div>
 

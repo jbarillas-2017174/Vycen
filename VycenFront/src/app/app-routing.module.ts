@@ -15,6 +15,7 @@ import { ClientGuard } from './guards/client.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { ProfileUserComponent } from './components/profile-user/profile-user.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'users', canActivate: [AdminGuard], component: UsersComponent },
   { path: 'reports', canActivate: [AdminGuard], component: ReportsComponent },
   { path: 'forum', component: ForumComponent },
+  { path: 'gallery', component: GalleryComponent },
   { path: 'shoppingCart', canActivate: [ClientGuard], component: ShoppingCartComponent },
   { path: '**', component: NotFoundComponent }
 ];

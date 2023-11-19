@@ -23,6 +23,7 @@ import { ProfileUserComponent } from './components/profile-user/profile-user.com
 import { LoadingAnimationComponent } from './components/loading-animation/loading-animation.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ChartsModule } from 'ng2-charts';
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ChartsModule } from 'ng2-charts';
     ProfileUserComponent,
     LoadingAnimationComponent,
     ReportsComponent,
+    GalleryComponent,
   ],
   imports: [
     BrowserModule,
