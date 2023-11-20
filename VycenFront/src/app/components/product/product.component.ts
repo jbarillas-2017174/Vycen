@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
     private cartRest: CartRestService,
     private userRest: UserService
   ) {
-    this.product = new ProductModel('', '', '', '', 0, new Date(), '');
+    this.product = new ProductModel('', '', '', '', 0, 0, new Date(), '');
     this.identity = userRest.getIdentity().role
   }
 

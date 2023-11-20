@@ -6,6 +6,7 @@ export class ProductModel {
         public size: String,
         public sex: String,
         public price: Number,
+        public stock: Number,
         public date: Date,
         public company: String
     ) { }
