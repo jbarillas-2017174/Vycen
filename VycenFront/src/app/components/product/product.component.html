@@ -21,6 +21,7 @@
 
     <div class="cards-container">
         <div *ngFor="let p of products | search: searchCompany">
+            <!-- <div class=""[routerLink]="['/seeProducts/'+p._id]"> -->
             <div class="card">
                 <img src="https://www.kantar.com/latin-america/-/media/project/kantar/latin-america/inspiracion/6-ropa_ok.jpg?h=600&w=900&hash=E7D6506DC20483C8E59FE2BBDE2A2A38"
                     class="card-img" alt="">
@@ -36,6 +37,9 @@
                     <p class="card-info"> Size: {{p.size}}</p>
                     <button class="cta">
                         <span class="hover-underline-animation" (click)="addProductCart(p._id)"> Buy Now </span>
+                    </button>
+                    <button class="cta more_details" >
+                        <span class="hover-underline-animation" [routerLink]="['/seeProducts/'+p._id]"> ¡Más detalles!</span>
                     </button>
                 </div>
             </div>
