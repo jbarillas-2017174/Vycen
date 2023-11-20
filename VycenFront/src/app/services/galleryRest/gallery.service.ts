@@ -20,8 +20,8 @@ export class GalleryService {
     return this.http.get(environment.baseUrl + 'gallery/getImages',  { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
   }
 
-  createReport(params: {}) {
-    return this.http.post(environment.baseUrl + 'product/createProduct', params, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
+  uploadImage(params: {}) {
+    return this.http.post(environment.baseUrl + 'gallery/uploadImage', params, { headers: this.httpOptions.set('Authorization', this.userRest.getToken()) });
   }
 
 
