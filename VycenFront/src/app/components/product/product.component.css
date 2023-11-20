@@ -98,6 +98,7 @@
     border: none;
     background: none;
     font-size: 19px;
+    margin-top: 15px;
 }
 
 
@@ -188,4 +189,9 @@ select {
 .addProductForm{
     display: grid;
     grid-template-columns: 48% 48%;
+}
+
+.more_details{
+    margin-top: 60px;
+    font-size: 17px;
 }
