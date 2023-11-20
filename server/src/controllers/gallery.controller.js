@@ -38,7 +38,7 @@ exports.getImages = async (req, res) => {
 
         // Filtrar solo los archivos con extensión de imagen (por ejemplo, .png)
         const imagenes = archivos.filter(archivo =>
-            ['.png', '.jpg', '.jpeg', '.gif'].includes(path.extname(archivo).toLowerCase())
+            ['.png', '.jpg', '.jpeg', '.gif', '.avif', '.webp'].includes(path.extname(archivo).toLowerCase())
         );
 
         // Mapear los nombres de archivo a las rutas completas
