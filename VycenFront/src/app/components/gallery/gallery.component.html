@@ -7,8 +7,11 @@
     </div>
     <hr>
     <div class="galleryCont">
-        <div class="img_gallery" *ngFor="let imag of imagenes">
+        <div class="img_gallery" *ngFor="let imag of imagenes" >
             <img [src]="'data:image/png;base64,'+imag.imagen" alt="">
+        </div>
+        <div class="img_gallery" *ngIf="imagenesUp" >
+            <img [src]="imagenesUp" alt="">
         </div>
     </div>
 </div>
@@ -26,7 +29,7 @@
             </div>
             <div class="modal-body">
                 <form #addProduct="ngForm" class="addProductForm">
-                    <input type="file">
+                    <input type="file" (change)="onFileSelected($event)">
                 </form>
 
             </div>
